@@ -1,6 +1,7 @@
 ###############################################################################
 ## This is simple tutorial on getting started with git and GitHub            
 ## weblink: http://net.tutsplus.com/tutorials/other/easy-version-control-with-git/
+## main documentation: http://git-scm.com/doc
 ###############################################################################
 
 # Configure git a bit. When you commit, it will know who did what.
@@ -265,6 +266,9 @@ Writing objects: 100% (10/10), 809 bytes, done.
 Total 10 (delta 1), reused 0 (delta 0)
 To git@github.com:shetalkshah/tryout.git
  + 206ccf1...b46f561 HEAD -> master (forced update)
+
+# Let's say you want added new file and want to push your changes again
+shetals@vgamdquad46[shetals/work/git_demo] git push git@github.com:shetalkshah/tryout.git master
 
 # Let's say you want to download repository shared by other users.
 # Try downloading jquery repo
