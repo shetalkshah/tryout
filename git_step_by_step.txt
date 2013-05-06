@@ -1,0 +1,315 @@
+###############################################################################
+## This is simple tutorial on getting started with git and GitHub            
+## weblink: http://net.tutsplus.com/tutorials/other/easy-version-control-with-git/
+###############################################################################
+
+# Configure git a bit. When you commit, it will know who did what.
+shetals@vgamdquad46[shetals/work/git_demo] git config --global user.name "Shetal Shah"
+shetals@vgamdquad46[shetals/work/git_demo] git config --global user.email "shetals@synopsys.com"
+shetals@vgamdquad46[shetals/work/git_demo] git config --global color.diff auto
+shetals@vgamdquad46[shetals/work/git_demo] git config --global color.status auto
+shetals@vgamdquad46[shetals/work/git_demo] git config --global color.branch auto
+
+# create a directory where you where you wan to initialize your git
+# It will be your repository. You can have branches in side you repository.
+shetals@vgamdquad46[vgrnd39/shetals/work] mkdir git_demo
+shetals@vgamdquad46[vgrnd39/shetals/work] cd git_demo
+
+# Initialize your code repository.
+shetals@vgamdquad46[shetals/work/git_demo] git init
+Initialized empty Git repository in /remote/vgrnd39/shetals/work/git_demo/.git/
+
+# Add a new file
+shetals@vgamdquad46[shetals/work/git_demo] vim README
+
+# Add the file to git. [ 'dot' will add everything ]
+shetals@vgamdquad46[shetals/work/git_demo] git add .
+
+# Commit your added file to repository
+shetals@vgamdquad46[shetals/work/git_demo] git commit
+Intial version of git tutorial <-- THIS IS WHERE YOU ADD YOUR COMMENT
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#   (use "git rm --cached <file>..." to unstage)
+#
+#new file:   README
+#
+[master (root-commit) 078ed42] Intial version of git tutorial
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+ create mode 100644 README
+
+# show status and activities on your branch. Default branch name is master.
+shetals@vgamdquad46[shetals/work/git_demo] git status
+# On branch master
+nothing to commit (working directory clean)
+
+# Edit the file
+shetals@vgamdquad46[shetals/work/git_demo] vim README
+# Add yet another file
+shetals@vgamdquad46[shetals/work/git_demo] vim somefile.txt
+
+# Look at the branch status. It show that you modified README file 
+# and there is one untracked file (because you did not use git add <new file>
+shetals@vgamdquad46[shetals/work/git_demo] git status
+
+# On branch master
+# Changed but not updated:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   README
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	somefile.txt
+no changes added to commit (use "git add" and/or "git commit -a")
+
+# Now add the file to repo
+shetals@vgamdquad46[shetals/work/git_demo] git add somefile.txt
+
+# You can now sew that new file is added to repo
+shetals@vgamdquad46[shetals/work/git_demo] git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	new file:   somefile.txt
+#
+# Changed but not updated:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   README
+#
+
+# Let's commit the new file
+shetals@vgamdquad46[shetals/work/git_demo] git commit -am "added somefile"
+[master 69ffbac] added somefile
+ 2 files changed, 2 insertions(+), 1 deletions(-)
+ create mode 100644 somefile.txt
+
+# Now, you know basics. Let's create a branch!  
+shetals@vgamdquad46[shetals/work/git_demo] git branch
+* master
+
+# the astrick (*) shows which branch you are currently in.
+shetals@vgamdquad46[shetals/work/git_demo] git branch beta
+  beta
+* master
+
+# Let's checkout a new branch called beta
+shetals@vgamdquad46[shetals/work/git_demo] git checkout beta
+Switched to branch 'beta'
+
+# Add a new file into branch beta
+shetals@vgamdquad46[shetals/work/git_demo] vim release_notes.txt
+shetals@vgamdquad46[shetals/work/git_demo] git status
+# On branch beta
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	release_notes.txt
+nothing added to commit but untracked files present (use "git add" to track)
+shetals@vgamdquad46[shetals/work/git_demo] git add .
+shetals@vgamdquad46[shetals/work/git_demo] git status
+# On branch beta
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	new file:   release_notes.txt
+#
+shetals@vgamdquad46[shetals/work/git_demo] git commit -m "add release notes to beta branch
+[beta b46f561] add release notes
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+ create mode 100644 release_notes.txt
+
+# Now, let's go back to master branch and review contents
+# You can see that release_notes.txt is not there.
+shetals@vgamdquad46[shetals/work/git_demo] git checkout master
+Switched to branch 'master'
+shetals@vgamdquad46[shetals/work/git_demo] ls -l
+total 0
+-rw-r--r-- 1 shetals src 36 May	 5 17:33 README
+-rw-r--r-- 1 shetals src 26 May	 5 17:33 somefile.txt
+
+# Now, let's go back to master branch and review contents
+shetals@vgamdquad46[shetals/work/git_demo] git checkout beta
+Switched to branch 'beta'
+shetals@vgamdquad46[shetals/work/git_demo] ls -l
+total 0
+-rw-r--r-- 1 shetals src 36 May	 5 17:33 README
+-rw-r--r-- 1 shetals src 17 May	 5 17:42 release_notes.txt
+-rw-r--r-- 1 shetals src 26 May	 5 17:33 somefile.txt
+
+# Let's merge beta branch to master (beta->merge)
+shetals@vgamdquad46[shetals/work/git_demo] git checkout master
+Switched to branch 'master'
+shetals@vgamdquad46[shetals/work/git_demo] git merge beta
+Updating 69ffbac..b46f561
+Fast-forward
+ release_notes.txt |	1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+ create mode 100644 release_notes.txt
+shetals@vgamdquad46[shetals/work/git_demo] git bragit status
+# On branch master
+nothing to commit (working directory clean)
+
+# You can see that now release_notes.txt is there in master
+shetals@vgamdquad46[shetals/work/git_demo] ls -l
+total 0
+-rw-r--r-- 1 shetals src 36 May	 5 17:33 README
+-rw-r--r-- 1 shetals src 17 May	 5 17:44 release_notes.txt
+-rw-r--r-- 1 shetals src 26 May	 5 17:33 somefile.txt
+
+# Let's delete the beta branch since we merged files from beta->master 
+shetals@vgamdquad46[shetals/work/git_demo] git branch -d beta
+Deleted branch beta (was b46f561).
+
+# You can see that beta branch got deleted
+shetals@vgamdquad46[shetals/work/git_demo] git branch
+* master
+
+# Le's see how to use commit history.
+shetals@vgamdquad46[shetals/work/git_demo] git log
+commit b46f56153c8ec4f54950c260a2f60c13ae9b6e2e
+Author: Shetal Shah <shetals@synopsys.com>
+Date:	Sun May 5 17:39:28 2013 -0700
+
+    add release notes
+
+commit 69ffbacb58d22855d3000b2e73c7d21edc26c143
+Author: Shetal Shah <shetals@synopsys.com>
+Date:	Sun May 5 17:34:11 2013 -0700
+
+    added somefile
+
+commit 078ed4280cb8fd496f8075de5070a5f042c44b64
+Author: Shetal Shah <shetals@synopsys.com>
+Date:	Sun May 5 17:32:25 2013 -0700
+
+    Intial version of git tutorial
+
+# Bit better way to look at commit history
+shetals@vgamdquad46[shetals/work/git_demo] git log --graph
+* commit b46f56153c8ec4f54950c260a2f60c13ae9b6e2e
+| Author: Shetal Shah <shetals@synopsys.com>
+| Date:	  Sun May 5 17:39:28 2013 -0700
+|
+|     add release notes
+|
+* commit 69ffbacb58d22855d3000b2e73c7d21edc26c143
+| Author: Shetal Shah <shetals@synopsys.com>
+| Date:	  Sun May 5 17:34:11 2013 -0700
+|
+|     added somefile
+|
+* commit 078ed4280cb8fd496f8075de5070a5f042c44b64
+  Author: Shetal Shah <shetals@synopsys.com>
+  Date:	  Sun May 5 17:32:25 2013 -0700
+
+      Intial version of git tutorial
+
+# You can also use git GUI to view branches/commit history etc.
+shetals@vgamdquad46[shetals/work/git_demo] set path = ( /depot/tk8.4/bin $path )
+shetals@vgamdquad46[shetals/work/git_demo] gitk --all
+
+# This section will show you how to use git with the world!
+# We will explain how to use GitHub here ...
+# Go to www.github.com and create an account
+# You will need SSH publik key to connect to github website
+
+# In below terminal, just enter and then give a passphrase (you will need to
+# remember it just like your password).  
+shetals@vgamdquad46[shetals/work/git_demo] ssh-keygen -t rsa -C "shetalkshah@gmail.com"
+Generating public/private rsa key pair.
+Enter file in which to save the key (/remote/vtghome12/shetals/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /remote/vtghome12/shetals/.ssh/id_rsa.
+Your public key has been saved in /remote/vtghome12/shetals/.ssh/id_rsa.pub.
+The key fingerprint is:
+41:c8:47:08:5a:7b:25:fa:ba:62:9d:74:66:76:6f:74 shetalkshah@gmail.com
+
+# Now open the .pub file and copy the key.
+# Go to github.com>Account Settings>SSH Keys>Add SSH key
+# Give some titile and paste the key (without whitespace or new line)
+shetals@vgamdquad46[shetals/work/git_demo] echo ~/.ssh/id_rsa.pub
+
+# Now let's see if everything went fine or not!
+# Try to connect to git. Say "yes" when promted and enter your passphrase.
+shetals@vgamdquad46[shetals/work/git_demo] ssh -T git@github.com
+The authenticity of host 'github.com (204.232.175.90)' can't be established.
+RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'github.com,204.232.175.90' (RSA) to the list of known hosts.
+Enter passphrase for key '/remote/vtghome12/shetals/.ssh/id_rsa':
+Hi shetalkshah! You've successfully authenticated, but GitHub does not provide shell access.
+
+# Let's say you want to share your repository with the world or upload to github.
+# First go to github.com>Create a New Repo
+# Add description and click "Create Repository"
+ 
+shetals@vgamdquad46[shetals/work/git_demo] git remote add origin git@github.com:shetalkshah/tryout.git
+shetals@vgamdquad46[shetals/work/git_demo] git push origin +HEAD
+Enter passphrase for key '/remote/vtghome12/shetals/.ssh/id_rsa':
+Counting objects: 10, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (10/10), 809 bytes, done.
+Total 10 (delta 1), reused 0 (delta 0)
+To git@github.com:shetalkshah/tryout.git
+ + 206ccf1...b46f561 HEAD -> master (forced update)
+
+# Let's say you want to download repository shared by other users.
+# Try downloading jquery repo
+
+shetals@vgamdquad46[shetals/work/git_demo] cd ..
+shetals@vgamdquad46[vgrnd39/shetals/work] mkdir jquery-git
+shetals@vgamdquad46[shetals/work/jquery-git] git clone git://github.com/jquery/jquery.git
+Initialized empty Git repository in /remote/vgrnd39/shetals/work/jquery-git/jquery/.git/
+remote: Counting objects: 28526, done.
+remote: Compressing objects: 100% (7625/7625), done.
+remote:nTotale28526 (delta821066),2reused.27594B(deltaK20302)
+Receiving objects: 100% (28526/28526), 14.40 MiB | 320 KiB/s, done.
+Resolving deltas: 100% (21066/21066), done.
+shetals@vgamdquad46[shetals/work/jquery-git] git pull
+fatal: Not a git repository (or any of the parent directories): .git
+shetals@vgamdquad46[shetals/work/jquery-git] ls -l
+total 4
+drwxr-xr-x 7 shetals src 4096 May  5 18:16 jquery/
+shetals@vgamdquad46[shetals/work/jquery-git] cd jquery/
+shetals@vgamdquad46[work/jquery-git/jquery] ls -l
+total 72
+-rw-r--r-- 1 shetals src  6353 May  5 18:16 AUTHORS.txt
+drwxr-xr-x 2 shetals src  4096 May  5 18:16 build/
+-rw-r--r-- 1 shetals src  8134 May  5 18:16 CONTRIBUTING.md
+-rw-r--r-- 1 shetals src 15021 May  5 18:16 Gruntfile.js
+-rw-r--r-- 1 shetals src  1099 May  5 18:16 MIT-LICENSE.txt
+-rw-r--r-- 1 shetals src   887 May  5 18:16 package.json
+-rw-r--r-- 1 shetals src 12453 May  5 18:16 README.md
+drwxr-xr-x 2 shetals src  4096 May  5 18:16 speed/
+drwxr-xr-x 4 shetals src  4096 May  5 18:16 src/
+drwxr-xr-x 5 shetals src  4096 May  5 18:16 test/
+shetals@vgamdquad46[vgrnd39/shetals/work] rm -rf jquery-git
+shetals@vgamdquad46[vgrnd39/shetals/work] cd git_demo
+
+
+# Let's say you want to pull your repository to head version.
+shetals@vgamdquad46[shetals/work/git_demo] git pull git@github.com:shetalkshah/tryout.git
+Enter passphrase for key '/remote/vtghome12/shetals/.ssh/id_rsa':
+From github.com:shetalkshah/tryout
+ * branch	     HEAD	-> FETCH_HEAD
+Already up-to-date.
+
+shetals@vgamdquad46[shetals/work/git_demo] cd ..
+shetals@vgamdquad46[vgrnd39/shetals/work] exit
+
+###############################################################################
+# Wow! You now know lot about git and GitHub. Enjoy! 
+###############################################################################
